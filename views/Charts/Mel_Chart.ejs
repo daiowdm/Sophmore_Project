@@ -1,0 +1,121 @@
+<html lang="en">
+	<head>
+		<title>Expense Bar Graph</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="style.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+	
+		<!--To utilize the charjs library, we must call it through the above CDN-->
+	</head>
+	<body>
+
+	<h1>Expense Bar Graph</h1>
+	<div id="canvas-holder" style="width:40%;"> 
+	    <canvas id="canvas"></canvas>
+	    <!--All models are placed in a div container labeled canvas and the model is given an id in the canvas tag which will be called when the bar chart is rendered in line XX-->
+    </div>
+
+	<script>
+	
+		var cntAuto = 0, cntUtil = 0, cntFood = 0, cntIns = 0, 
+		cntTax = 0, cntHouse = 0, cntMiscE = 0;
+	
+	 var rows = <%-JSON.stringify(budgets)%>
+        console.log(rows);
+        console.log("lorem ipsum");
+
+        for(i=0; i< rows.length; i++) {
+            
+            switch(rows[i].category) {
+            	case "Auto":
+            		cntAuto += rows[i].amount;
+            		console.log(cntAuto);
+            		break;
+            	case "Utilities":
+            		cntUtil += rows[i].amount;
+            		console.log(cntUtil);
+            		break;
+            	case "Food":
+            		cntFood += rows[i].amount;
+            		console.log(cntFood);
+            		break;
+            	case "Insurance":
+            		cntIns += rows[i].amount;
+            		console.log(cntIns);
+            		break;
+            	case "Tax":
+            		cntTax += rows[i].amount;
+            		console.log(cntTax);
+            		break;
+            	case "Housing":
+            		cntHouse += rows[i].amount;
+            		console.log(cntHouse);
+            		break;
+            	case "MiscellaneousE":
+            		cntMiscE += rows[i].amount;
+            		console.log(cntMisc);
+            		break;
+            	default:
+            		console.log("No category! Entry has been disregarded :( ");
+            	}
+            }
+	
+	
+	
+	
+	
+	
+		window.chartColors = {
+	    	red: 'rgb(255, 99, 132)',
+	    	orange: 'rgb(255, 159, 64)',
+	    	yellow: 'rgb(255, 205, 86)',
+	    	green: 'rgb(75, 192, 192)',
+	    	blue: 'rgb(54, 162, 235)',
+	    	purple: 'rgb(153, 102, 255)',
+	    	lime: 'rgb(174, 234, 0)',
+	    	grey: 'rgb(201, 203, 207)'
+	    };
+	    
+		var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+		
+		var userData = [];
+
+		var barChartData = {
+			labels: MONTHS,
+			datasets: [
+				{	label: 'Income',
+					backgroundColor: window.chartColors.green,                               //color(window.chartColors.red).alpha(0.5).rgbString(),
+					borderColor: window.chartColors.green,
+					borderWidth: 1,
+					data: [100, 50, 60, 33, 10, 70, 55, 45, 33, 15, 100, 4]},					//to be replaced
+
+				{	label: 'Expense',
+					backgroundColor: window.chartColors.red,                               //color(window.chartColors.red).alpha(0.5).rgbString(),
+					borderColor: window.chartColors.yellow,
+					borderWidth: 1,
+					data: [20, 60, 70, 80, 90, 10, 25, 8, 55, 66, 77, 88]}]				//to be replaced
+		};
+
+		window.onload = function() {
+			var ctx = document.getElementById('canvas').getContext('2d');
+			window.myBar = new Chart(ctx, {
+				type: 'bar',
+				data: barChartData,
+				options: {
+					responsive: true,
+					legend: {
+						position: 'top',
+					},
+					title: {
+						display: true,
+						text: 'Monthly Income vs Expense'
+					}
+				}
+			});
+
+		};
+		
+
+	</script>
+</body>
+</html>

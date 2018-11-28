@@ -1,0 +1,79 @@
+<html lang="en">
+	<head>
+		<title>Expense PieChart</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="style.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script> 
+		<!--To utilize the charjs library, we must call it through the above CDN-->
+	</head>
+	<body>
+
+	<h1>Transaction Ratio</h1>
+	<div id="canvas-holder" style="width:40%"> 
+	    <canvas id="chart-area"></canvas>
+	    <!--All models are placed in a div container labeled canvas and the model is given an id in the canvas tag which will be called when the pie chart is rendered in line 73-->
+    </div>
+
+	<script>
+	    window.chartColors = {
+	    	red: 'rgb(255, 99, 132)',
+	    	orange: 'rgb(255, 159, 64)',
+	    	yellow: 'rgb(255, 205, 86)',
+	    	green: 'rgb(75, 192, 192)',
+	    	blue: 'rgb(54, 162, 235)',
+	    	purple: 'rgb(153, 102, 255)',
+	    	lime: 'rgb(174, 234, 0)',
+	    	grey: 'rgb(201, 203, 207)'
+	    };
+
+		var config =  {
+			type: 'pie',
+			data: {
+				datasets: [{
+					data: [55, 10, 330, 100, 280, 500, 110],
+					backgroundColor: [
+						window.chartColors.red,
+						window.chartColors.orange,
+						window.chartColors.yellow,
+						window.chartColors.green,
+						window.chartColors.blue,
+						window.chartColors.purple,
+						window.chartColors.lime]
+				}],
+						
+				label: 'Dataset 1',
+				labels: [
+					'Auto',
+					'Utilities',
+					'Food',
+					'Insurance',
+					'Taxes',
+					'Housing',
+					'Miscellaneous']},
+				options: {
+					responsive: true
+				}
+		};
+
+		window.onload = function() {
+			var ctx = document.getElementById('chart-area').getContext('2d'); //To render a chart, you call the canvas you created when you created a container for it
+			window.myPie = new Chart(ctx, config);
+		};
+	</script>
+	
+	below here..
+	<ul class="ratio">
+	
+	<
+  <% for(var i=0; i<ratio.length; i++) {%>
+    <li class="quote">
+      <span><%= ratio[i].type %></span>
+      <span><%= ratio[i].total %></span>
+     
+    </li>
+  <% } %>
+  </ul>
+	
+	
+</body>
+</html>

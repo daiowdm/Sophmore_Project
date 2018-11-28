@@ -1,0 +1,114 @@
+<html lang="en">
+	<head>
+		<title>Expense Bar Graph</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="style.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+	
+		<!--To utilize the charjs library, we must call it through the above CDN-->
+	</head>
+	<body>
+
+	<h1>Expense Bar Graph</h1>
+	<div id="canvas-holder" style="width:40%;"> 
+	    <canvas id="canvas"></canvas>
+	    <!--All models are placed in a div container labeled canvas and the model is given an id in the canvas tag which will be called when the bar chart is rendered in line XX-->
+    </div>
+
+	<script>
+    	 var expenseTotal = [0,0,0,0,0,0,0,0,0,0,0,0], incomeTotal = [0,0,0,0,0,0,0,0,0,0,0,0];
+	
+		 var rows = <%-JSON.stringify(budgets)%>
+		    console.log(rows);
+		    console.log("lorem ipsum big butts");
+		
+		    for(i=0; i< rows.length; i++) {
+		        
+		        for(z=0; z < rows[i].length; z++){
+		        switch(rows[i][z].type) {
+		        	case "Expense":
+		        		console.log(i + " " + z + " ");
+		        		expenseTotal[i] += rows[i][z].amount;
+		        		console.log(expenseTotal[i]);
+		        		break;
+		        	case "Income":
+		        		incomeTotal[i] += rows[i][z].amount;
+						console.log(i + " " + (z));
+		        		break;
+		        	default:
+		        		console.log("No category! Entry has been disregarded :( ");
+		        	}
+		        	
+		        	
+		        }	
+		        	
+		        	
+		        }
+	console.log(expenseTotal);
+	console.log(incomeTotal);
+            
+		window.chartColors = {
+	    	red: 'rgb(255, 99, 132)',
+	    	orange: 'rgb(255, 159, 64)',
+	    	yellow: 'rgb(255, 205, 86)',
+	    	green: 'rgb(75, 192, 192)',
+	    	blue: 'rgb(54, 162, 235)',
+	    	purple: 'rgb(153, 102, 255)',
+	    	lime: 'rgb(174, 234, 0)',
+	    	grey: 'rgb(201, 203, 207)'
+	    };
+	    
+		var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+		
+		var userData = [];
+
+		var barChartData = {
+			labels: MONTHS,
+			datasets: [
+				{	label: 'Income',
+					backgroundColor: window.chartColors.green,                               //color(window.chartColors.red).alpha(0.5).rgbString(),
+					borderColor: window.chartColors.green,
+					borderWidth: 2,
+					data: [incomeTotal[0], incomeTotal[1], incomeTotal[2], incomeTotal[3], incomeTotal[4], incomeTotal[5], incomeTotal[6], incomeTotal[7], incomeTotal[8], incomeTotal[9], incomeTotal[10], incomeTotal[11]]},					//to be replaced
+
+				{	label: 'Expense',
+					backgroundColor: window.chartColors.red,                               //color(window.chartColors.red).alpha(0.5).rgbString(),
+					borderColor: window.chartColors.yellow,
+					borderWidth: 2,
+					data: [expenseTotal[0], expenseTotal[1], expenseTotal[2], expenseTotal[3], expenseTotal[4], expenseTotal[5], expenseTotal[6], expenseTotal[7], expenseTotal[8], expenseTotal[9], expenseTotal[10], expenseTotal[11]]}]
+					
+		};
+
+		window.onload = function() {
+			var ctx = document.getElementById('canvas').getContext('2d');
+			var cty = document.getElementById('canvas').getContext('2d');
+		
+			window.myBar = new Chart(ctx, {
+				type: 'bar',
+				data: barChartData,
+				options: {
+					responsive: true,
+					scaleShowValues: true,
+					scales: {
+						yAxes: [{
+							ticks: {BeginAtZero: true}
+							}],
+						xAxes: [{
+							ticks: {autoSkip: false}
+							}]
+					},
+					legend: {
+						position: 'top',
+					},
+					title: {
+						display: true,
+						text: 'Monthly Income vs Expense'
+					}
+				}
+			});
+		};
+		
+
+	</script>
+</body>
+</html>

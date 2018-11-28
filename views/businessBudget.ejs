@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>BUSINESS BUDGET</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="style.css">
+<<<<<<< HEAD
+			<script>
+					function disableIncome(){ 
+						console.log("diable income");
+						document.getElementById("ExpenseDrop").removeAttribute("disabled");
+						document.getElementById("IncomeDrop").disabled=true;
+					}
+					
+					function disableExpense(){ 
+						console.log("disable expense");
+						document.getElementById("IncomeDrop").removeAttribute("disabled");
+						document.getElementById("ExpenseDrop").disabled=true;
+					}
+				
+				</script>
+=======
+		<script>
+			var rows = <%-JSON.stringify(budgets)%>
+	        console.log(rows);
+	        console.log("lorem ipsum");
+			function disableIncome(){ //Show Expenses
+				console.log("diable income");
+				document.getElementById("ExpenseDrop").removeAttribute("disabled");
+				document.getElementById("IncomeDrop").disabled=true;
+				Feedback.innerHTML = "";
+				for(i=0; i< rows.length; i++) {
+	            	if(rows[i].type == "Expense"){
+	            		var thisDate = new Date (rows[i].date);
+	                	Feedback.innerHTML +=  rows[i].category + ': $' + rows[i].amount + " " + rows[i].description + " " + thisDate.getFullYear()+'-' + (thisDate.getMonth()+1) + '-'+thisDate.getDate() + '<form action="/deletebusiness/' + rows[i]._id + '?_method=DELETE" method="POST"><button>x</button></form><br />';
+	            		}
+					}
+				}
+			function disableExpense(){  //Show Incomes
+				console.log("disable expense");
+				document.getElementById("IncomeDrop").removeAttribute("disabled");
+				document.getElementById("ExpenseDrop").disabled=true;
+				Feedback.innerHTML = "";
+				for(i=0; i< rows.length; i++) {
+	            	if(rows[i].type == "Income"){
+	            		var thisDate = new Date (rows[i].date);
+	            		Feedback.innerHTML +=  rows[i].category + ': $' + rows[i].amount + " " + rows[i].description + " " + thisDate.getFullYear()+'-' + (thisDate.getMonth()+1) + '-'+thisDate.getDate() + '<form action="/deletebusiness/' + rows[i]._id + '?_method=DELETE" method="POST"><button>x</button></form><br />';
+	 	            	}
+					}
+				}
+				
+		</script>
+>>>>>>> Final Commit: v1.0
+	</head>
+	<body>
+		<div class="container">
+			<div id="homeTitle">
+				<h1> BUSINESS BUDGET</h1>
+			</div>
+			<form action="/addbusinessbudget" method="POST">
+<<<<<<< HEAD
+			    
+			<fieldset> 
+=======
+>>>>>>> Final Commit: v1.0
+				<div class="radioBtn">
+					<input type="radio" name="IncExp" value="1" onclick="disableExpense()">Income
+					<input type="radio" name="IncExp" value="0" onclick="disableIncome()">Expense <br>
+				</div>
+				<label for="Category">Category:</label>
+				<select style="height:23px;" name="catInc" id="IncomeDrop"> 
+					<option disabled selected value>Income</option>
+					<option value="Revenue">Revenue</option>
+					<option value="Dividends">Dividends</option>
+					<option value="MiscellaneousI">Miscellaneous</option>
+				</select>
+					<select style="height:23px;" name="catExp"  id="ExpenseDrop"> 
+					<option disabled selected value>Expense</option>
+					<option value="Payroll">Payroll</option>
+					<option value="Rent">Rent</option>
+					<option value="Equipment">Equipment</option>
+					<option value="Supplies">Supplies</option>
+					<option value="Utilities">Utilities</option>
+					<option value="MiscellaneousE">Miscellaneous</option>
+				</select>
+				<br>
+				<label for="Amount">Amount:  </label>
+<<<<<<< HEAD
+				<input type="number" name="Amount" value=""><br>
+=======
+				<input type="number" name="Amount" step="0.01" required><br>
+>>>>>>> Final Commit: v1.0
+				<label for="Description">Description:</label>
+				<input type="text" name="desTxt"><br>
+				<label for="Date">Date:</label>
+				<select style="height:23px;"> 
+<<<<<<< HEAD
+					<option value="Jan">January</option>
+					<option value="Feb">February</option>
+					<option value="Mar">March</option>
+					<option value="Apr">April</option>
+					<option value="May">May</option>
+					<option value="Jun">June</option>
+					<option value="Jul">July</option>
+					<option value="Aug">August</option>
+					<option value="Sep">September</option>
+					<option value="Oct">October</option>
+					<option value="Nov">November</option>
+					<option value="Dec">December</option>
+=======
+					<option value="1">January</option>
+					<option value="2">February</option>
+					<option value="3">March</option>
+					<option value="4">April</option>
+					<option value="5">May</option>
+					<option value="6">June</option>
+					<option value="7">July</option>
+					<option value="8">August</option>
+					<option value="9">September</option>
+					<option value="10">October</option>
+					<option value="11">November</option>
+					<option value="12">December</option>
+>>>>>>> Final Commit: v1.0
+				</select>
+				<select style="height:23px;"> 
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+					<option value="13">13</option>
+					<option value="14">14</option>
+					<option value="15">15</option>
+					<option value="16">16</option>
+					<option value="17">17</option>
+					<option value="18">18</option>
+					<option value="19">19</option>
+					<option value="20">20</option>
+					<option value="21">21</option>
+					<option value="22">22</option>
+					<option value="23">23</option>
+					<option value="24">24</option>
+					<option value="25">25</option>
+					<option value="26">26</option>
+					<option value="27">27</option>
+					<option value="28">28</option>
+					<option value="29">29</option>
+					<option value="30">30</option>
+					<option value="31">31</option>
+				</select>
+				<input type="number" name="yearTxt" value="  Year" style="width: 60px;">
+				<br>
+				<button type="Submit">Submit</button>
+<<<<<<< HEAD
+				<button type="Reset">Reset</button>
+			</fieldset>
+			</form>
+			<div id="list">
+				<textarea id="Feedback" rows="28" cols="118" name="board" readonly></textarea>
+			</div>
+		
+					<button type="button" class="button3"> Pie Chart</button>
+					<button type="button" class="button3"> Bar Chart</button>
+		
+=======
+				<button type="Reset">Reset</button>	
+				<button type="button" class="button3" onclick="location.href='/piechartBusiness'"> Pie Chart</button>
+				<button type="button" class="button3" onclick="location.href='/bargraphBusiness'"> Bar Chart</button>
+			</form>
+			<div id="Feedback">
+			</div>
+>>>>>>> Final Commit: v1.0
+		</div>
+	</body>
+</html>

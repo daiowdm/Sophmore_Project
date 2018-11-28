@@ -1,0 +1,147 @@
+<html lang="en">
+	<head>
+		<title>Expense PieChart</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="style.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script> 
+		<!--To utilize the charjs library, we must call it through the above CDN-->
+	</head>
+	<body>
+
+	<h1>Transaction Ratio</h1>
+	<div id="canvas-holder" style="width:38%; float:left">
+		<h2>Expense Ratio</h2> 
+	    <canvas id="chart-area"></canvas>
+	    <!--All models are placed in a div container labeled canvas and the model is given an id in the canvas tag which will be called when the pie chart is rendered in line 73-->
+    </div>
+    
+    <div id="canvas-holder2" style="width:38%; float:right">		<!--Feel free to change this if I did it a stupid way. This is all I could figure out-->
+    	<h2>Income Ratio</h2>
+    	<canvas id="second-pie-area"></canvas>
+    </div>
+
+	<script>
+	console.log("bimbo");
+	
+	var cntAuto = 0, cntUtil = 0, cntFood = 0, cntIns = 0, 
+		cntTax = 0, cntHouse = 0, cntMiscE = 0;
+	
+	 var rows = <%-JSON.stringify(budgets)%>
+        console.log(rows);
+        console.log("lorem ipsum");
+
+        for(i=0; i< rows.length; i++) {
+            
+            switch(rows[i].category) {
+            	case "Auto":
+            		cntAuto += rows[i].amount;
+            		console.log(cntAuto);
+            		break;
+            	case "Utilities":
+            		cntUtil += rows[i].amount;
+            		console.log(cntUtil);
+            		break;
+            	case "Food":
+            		cntFood += rows[i].amount;
+            		console.log(cntFood);
+            		break;
+            	case "Insurance":
+            		cntIns += rows[i].amount;
+            		console.log(cntIns);
+            		break;
+            	case "Tax":
+            		cntTax += rows[i].amount;
+            		console.log(cntTax);
+            		break;
+            	case "Housing":
+            		cntHouse += rows[i].amount;
+            		console.log(cntHouse);
+            		break;
+            	case "MiscellaneousE":
+            		cntMiscE += rows[i].amount;
+            		console.log(cntMisc);
+            		break;
+            	default:
+            		console.log("No category! Entry has been disregarded :( ");
+            	}
+            }
+	
+	
+	    window.chartColors = {
+	    	red: 'rgb(255, 99, 132)',
+	    	orange: 'rgb(255, 159, 64)',
+	    	yellow: 'rgb(255, 205, 86)',
+	    	green: 'rgb(75, 192, 192)',
+	    	blue: 'rgb(54, 162, 235)',
+	    	purple: 'rgb(153, 102, 255)',
+	    	lime: 'rgb(174, 234, 0)',
+	    	grey: 'rgb(201, 203, 207)'
+	    };
+
+		var config =  {
+			type: 'pie',
+			data: {
+				datasets: [{
+					data: [cntAuto, cntUtil, cntFood, cntIns, cntTax, cntHouse, cntMiscE],
+					backgroundColor: [
+						window.chartColors.red,
+						window.chartColors.orange,
+						window.chartColors.yellow,
+						window.chartColors.green,
+						window.chartColors.blue,
+						window.chartColors.purple,
+						window.chartColors.lime]
+				}],
+						
+				label: 'Dataset 1',
+				labels: [
+					'Auto',
+					'Utilities',
+					'Food',
+					'Insurance',
+					'Taxes',
+					'Housing',
+					'Miscellaneous']},
+				options: {
+					responsive: true
+				}
+		};
+		
+		var config2 =  {
+			type: 'pie',
+			data: {
+				datasets: [{
+					data: [100, 40, 82, 20, 65],
+					backgroundColor: [
+						window.chartColors.red,
+						window.chartColors.orange,
+						window.chartColors.yellow,
+						window.chartColors.green,
+						window.chartColors.blue,
+						window.chartColors.purple,
+						window.chartColors.lime]
+				}],
+						
+				label: 'Dataset 1',
+				labels: [
+					'Payroll',
+					'Spouse\'s Income',
+					'Loan',
+					'Tax Return',
+					'MiscellaneousI']},
+				options: {
+					responsive: true
+				}
+		};
+
+		window.onload = function() {
+			var ctx = document.getElementById('chart-area').getContext('2d'); //To render a chart, you call the canvas you created when you created a container for it
+			window.myPie = new Chart(ctx, config);
+			
+			var cty = document.getElementById('second-pie-area').getContext('2d');
+			window.mySecondPie = new Chart(cty, config2);
+		};
+	</script>
+	
+</body>
+</html>

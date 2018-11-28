@@ -1,0 +1,68 @@
+<html lang="en">
+	<head>
+		<title>Expense Bar Graph</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="style.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+	
+		<!--To utilize the charjs library, we must call it through the above CDN-->
+	</head>
+	<body>
+
+	<h1>Expense Bar Graph</h1>
+	<div id="canvas-holder" style="width:40%;"> 
+	    <canvas id="canvas"></canvas>
+	    <!--All models are placed in a div container labeled canvas and the model is given an id in the canvas tag which will be called when the bar chart is rendered in line XX-->
+    </div>
+
+	<script>
+		window.chartColors = {
+	    	red: 'rgb(255, 99, 132)',
+	    	orange: 'rgb(255, 159, 64)',
+	    	yellow: 'rgb(255, 205, 86)',
+	    	green: 'rgb(75, 192, 192)',
+	    	blue: 'rgb(54, 162, 235)',
+	    	purple: 'rgb(153, 102, 255)',
+	    	lime: 'rgb(174, 234, 0)',
+	    	grey: 'rgb(201, 203, 207)'
+	    };
+	    
+		var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+		
+		var userData = [];
+
+		var barChartData = {
+			labels: MONTHS,
+			datasets: [{
+				label: 'Year',
+				backgroundColor: window.chartColors.green,                               //color(window.chartColors.red).alpha(0.5).rgbString(),
+				borderColor: window.chartColors.green,
+				borderWidth: 1,
+				data: [100, 50, 60, 33, 10, 70, 55, 45, 33, 15, 100, 4]					//to be replaced
+			}]
+
+		};
+
+		window.onload = function() {
+			var ctx = document.getElementById('canvas').getContext('2d');
+			window.myBar = new Chart(ctx, {
+				type: 'bar',
+				data: barChartData,
+				options: {
+					responsive: true,
+					legend: {
+						position: 'top',
+					},
+					title: {
+						display: true,
+						text: 'Monthly Spending'
+					}
+				}
+			});
+
+		};
+		
+
+	</script>
+</body>
+</html>
